@@ -1,0 +1,12 @@
+streamlit
+pandas
+numpy
+scikit-learn
+random-forest
+matplotlib
+seaborn
+plotly
+kaleido
+joblib
+notebook
+ipykernel
