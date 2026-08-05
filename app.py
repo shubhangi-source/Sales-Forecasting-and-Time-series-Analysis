@@ -277,7 +277,7 @@ with tab3:
     # -------------------------
 
     # Change line 279 in app.py to:
-    df = pd.read_csv("featured_sales_data.csv")
+    df = pd.read_csv("../data/featured_sales_data.csv")
     c1, c2, c3, c4 = st.columns(4)
 
     c1.metric("💰 Total Sales", f"₹ {df['Sales'].sum():,.0f}")
