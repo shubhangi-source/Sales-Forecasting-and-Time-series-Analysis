@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 import datetime
+import os
+import gdown
+
 
 # -------------------------
 # Page Configuration
@@ -9,14 +12,18 @@ import datetime
 
 st.set_page_config(page_title="Sales Forecasting System", page_icon="📈", layout="wide")
 
-# -------------------------
-# Load Model
-# ------------------------
+os.makedirs("model", exist_ok=True)
+model_path = "model/sales_forecasting_new_model.pkl"
 
-model = joblib.load(
-    "model/sales_forecasting_new_model.pkl",
-    mmap_mode="r",
-)
+# Download model from Google Drive if it isn't already present
+if not os.path.exists(model_path):
+    file_id = "1sEDTak7AphaBtoT-nu0ujF_u-iv9Aei8"
+    url = f"https://drive.google.com/uc?id={file_id}"
+    # Replace line 22:
+    gdown.download(url, model_path, quiet=False, fuzzy=True)
+
+# Load the model
+model = joblib.load(model_path)
 
 # -------------------------
 # Title
