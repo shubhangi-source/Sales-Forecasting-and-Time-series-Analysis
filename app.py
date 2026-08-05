@@ -14,7 +14,7 @@ st.set_page_config(page_title="Sales Forecasting System", page_icon="📈", layo
 # ------------------------
 
 model = joblib.load(
-    r"C:\Users\shubh\OneDrive\Documents\sales analysis and forecasting\model\sales_forecasting_new_model.pkl",
+    "model/sales_forecasting_new_model.pkl",
     mmap_mode="r",
 )
 
