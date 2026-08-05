@@ -2,7 +2,6 @@ streamlit
 pandas
 numpy
 scikit-learn
-random-forest
 matplotlib
 seaborn
 plotly
