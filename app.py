@@ -276,8 +276,17 @@ with tab3:
     # KPI Cards
     # -------------------------
 
-    # Change line 279 in app.py to:
-    df = pd.read_csv("featured__new_sales_data.csv")
+    # Download CSV from Google Drive if not present
+    # Download CSV from Google Drive if not present
+    csv_path = "data/featured__new_sales_data.csv"
+    os.makedirs("data", exist_ok=True)
+
+    if not os.path.exists(csv_path):
+        csv_file_id = "1N8C_0E2WJaJg30VICuIXcqTFFY3qobRK"
+        csv_url = f"https://drive.google.com/uc?id={csv_file_id}"
+        gdown.download(csv_url, csv_path, quiet=False)
+
+    df = pd.read_csv(csv_path)
     c1, c2, c3, c4 = st.columns(4)
 
     c1.metric("💰 Total Sales", f"₹ {df['Sales'].sum():,.0f}")
