@@ -276,9 +276,7 @@ with tab3:
     # KPI Cards
     # -------------------------
 
-    df = pd.read_csv(
-        r"C:\Users\shubh\OneDrive\Documents\sales analysis and forecasting\featured__new_sales_data.csv"
-    )
+    df = pd.read_csv("data/processed_sales_data.csv")
     c1, c2, c3, c4 = st.columns(4)
 
     c1.metric("💰 Total Sales", f"₹ {df['Sales'].sum():,.0f}")
