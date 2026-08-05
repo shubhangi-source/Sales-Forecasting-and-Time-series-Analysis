@@ -20,7 +20,8 @@ if not os.path.exists(model_path):
     file_id = "1sEDTak7AphaBtoT-nu0ujF_u-iv9Aei8"
     url = f"https://drive.google.com/uc?id={file_id}"
     # Replace line 22:
-    gdown.download(url, model_path, quiet=False, fuzzy=True)
+    file_id = "1sEDTak7AphaBtoT-nu0ujF_u-iv9Aei8"
+    gdown.download(id=file_id, output=model_path, quiet=False)
 
 # Load the model
 model = joblib.load(model_path)
