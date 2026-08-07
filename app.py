@@ -208,13 +208,21 @@ with tab3:
 
     st.subheader("📅 Monthly Sales")
 
-    monthly_sales = df.groupby("Month")["Sales"].mean().reset_index()
+    df["Date"] = pd.to_datetime(df["Date"])
+    df["Month_Num"] = df["Date"].dt.month
+    df["Month"] = df["Date"].dt.strftime("%b")
 
+    monthly_sales = (
+        df.groupby(["Month_Num", "Month"], as_index=False)["Sales"]
+        .mean()
+        .sort_values("Month_Num")
+        
     fig = px.bar(
         monthly_sales,
         x="Month",
         y="Sales",
-        color="Month",
+        color="Sales", 
+        color_continuous_scale="blues",
         text_auto=True,
         title="Average Monthly Sales",
     )
@@ -234,7 +242,8 @@ with tab3:
         dow,
         x="DayOfWeek",
         y="Sales",
-        color="DayOfWeek",
+        color="Sales",
+        color_continuous_scale="blues",
         text_auto=True,
         title="Average Sales by Day",
     )
@@ -275,7 +284,9 @@ with tab3:
         .reset_index()
     )
 
-    fig = px.bar(top_store, x="Store", y="Sales", text_auto=True, title="Top 10 Stores")
+    fig = px.bar(top_store, x="Store", y="Sales",
+                 color="Sales",
+        color_continuous_scale="blues",text_auto=True, title="Top 10 Stores")
 
     st.plotly_chart(fig, use_container_width=True)
 
@@ -285,10 +296,16 @@ with tab3:
 
     st.subheader("🔥 Feature Correlation")
 
-    corr = df.select_dtypes(include="number").corr()
+    corr = df.corr(numeric_only=True)
 
     fig = px.imshow(
-        corr, text_auto=True, aspect="auto", color_continuous_scale="RdBu_r"
+        corr,
+        text_auto=".2f",
+        color_continuous_scale="tealrose",
+        zmin=-1,
+        zmax=1,
+        aspect="auto",
+        title="Correlation Heatmap",
     )
 
     st.plotly_chart(fig, use_container_width=True)
