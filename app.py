@@ -215,7 +215,7 @@ with tab3:
     monthly_sales = (
         df.groupby(["Month_Num", "Month"], as_index=False)["Sales"]
         .mean()
-        .sort_values("Month_Num")
+        .sort_values("Month_Num"))
         
     fig = px.bar(
         monthly_sales,
