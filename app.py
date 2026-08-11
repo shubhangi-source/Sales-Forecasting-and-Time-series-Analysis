@@ -298,6 +298,22 @@ with tab3:
 
     corr = df.corr(numeric_only=True)
 
+     numeric_df = df.select_dtypes(include=np.number).copy()
+
+    # Remove constant columns
+    # Constant columns cause NaN correlations
+    numeric_df = numeric_df.loc[:, numeric_df.nunique(dropna=True) > 1]
+
+    # Calculate correlation
+    corr = numeric_df.corr()
+
+    # Remove infinity values
+    corr = corr.replace([np.inf, -np.inf], np.nan)
+
+    # Replace remaining NaN values
+    corr = corr.fillna(0)
+
+    # Create heatmap
     fig = px.imshow(
         corr,
         text_auto=".2f",
@@ -307,6 +323,10 @@ with tab3:
         aspect="auto",
         title="Correlation Heatmap",
     )
+
+    fig.update_traces(textfont_size=9)
+
+    fig.update_layout(height=700, margin=dict(l=20, r=20, t=50, b=50))
 
     st.plotly_chart(fig, use_container_width=True)
 
