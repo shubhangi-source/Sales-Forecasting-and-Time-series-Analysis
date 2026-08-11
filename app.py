@@ -299,7 +299,7 @@ with tab3:
 
     corr = df.corr(numeric_only=True)
 
-     numeric_df = df.select_dtypes(include=np.number).copy()
+    numeric_df = df.select_dtypes(include=np.number).copy()
 
     # Remove constant columns
     # Constant columns cause NaN correlations
