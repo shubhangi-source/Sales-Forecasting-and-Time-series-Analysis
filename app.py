@@ -141,7 +141,7 @@ with tab2:
                 "RollingMean30": [rollingmean30],
                 "RollingStd7": [rollingstd7],
                 "RollingStd30": [rollingstd30],
-                "ExpandingMean": [expandingmean]
+                "ExpandingMean": [expandingmean],
             }
         )
 
@@ -151,7 +151,7 @@ with tab2:
         if st.button("Predict Sales"):
             # Align input_df columns to match the trained model's feature names and order
             if hasattr(model, "feature_names_in_"):
-            input_df = input_df[model.feature_names_in_]
+                input_df = input_df[model.feature_names_in_]
 
             prediction = model.predict(input_df)[0]
 
