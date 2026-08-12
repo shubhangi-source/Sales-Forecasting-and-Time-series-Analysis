@@ -1,3 +1,5 @@
 *.pkl
-
+data/*.csv
+notebook/*.csv
+*.csv
 .ipynb_checkpoints/

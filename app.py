@@ -6,7 +6,6 @@ import os
 import gdown
 import numpy as np
 
-
 # -------------------------
 # Page Configuration
 # -------------------------
@@ -18,7 +17,7 @@ model_path = "model/sales_forecasting_new_model.pkl"
 
 # Download model from Google Drive if it isn't already present
 if not os.path.exists(model_path):
-    file_id = "1sEDTak7AphaBtoT-nu0ujF_u-iv9Aei8"
+    file_id = "1RqiU1mrBRs7j0cPvWFa0BksZVXGnlUoh"
     url = f"https://drive.google.com/uc?id={file_id}"
     # Replace line 22:
     file_id = "1sEDTak7AphaBtoT-nu0ujF_u-iv9Aei8"
@@ -141,8 +140,8 @@ with tab2:
                 "RollingMean7": [rollingmean7],
                 "RollingMean30": [rollingmean30],
                 "RollingStd7": [rollingstd7],
-                "ExpandingMean": [expandingmean],
                 "RollingStd30": [rollingstd30],
+                "ExpandingMean": [expandingmean],
             }
         )
 
@@ -216,13 +215,14 @@ with tab3:
     monthly_sales = (
         df.groupby(["Month_Num", "Month"], as_index=False)["Sales"]
         .mean()
-        .sort_values("Month_Num"))
-        
+        .sort_values("Month_Num")
+    )
+
     fig = px.bar(
         monthly_sales,
         x="Month",
         y="Sales",
-        color="Sales", 
+        color="Sales",
         color_continuous_scale="blues",
         text_auto=True,
         title="Average Monthly Sales",
@@ -285,9 +285,15 @@ with tab3:
         .reset_index()
     )
 
-    fig = px.bar(top_store, x="Store", y="Sales",
-                 color="Sales",
-        color_continuous_scale="blues",text_auto=True, title="Top 10 Stores")
+    fig = px.bar(
+        top_store,
+        x="Store",
+        y="Sales",
+        color="Sales",
+        color_continuous_scale="blues",
+        text_auto=True,
+        title="Top 10 Stores",
+    )
 
     st.plotly_chart(fig, use_container_width=True)
 
