@@ -19,8 +19,6 @@ model_path = "model/sales_forecasting_new_model.pkl"
 if not os.path.exists(model_path):
     file_id = "1RqiU1mrBRs7j0cPvWFa0BksZVXGnlUoh"
     url = f"https://drive.google.com/uc?id={file_id}"
-    # Replace line 22:
-    file_id = "1sEDTak7AphaBtoT-nu0ujF_u-iv9Aei8"
     gdown.download(id=file_id, output=model_path, quiet=False)
 
 # Load the model
@@ -306,8 +304,6 @@ with tab3:
 
     st.subheader("🔥 Feature Correlation")
 
-    corr = df.corr(numeric_only=True)
-
     numeric_df = df.select_dtypes(include=np.number).copy()
 
     # Remove constant columns
@@ -330,11 +326,11 @@ with tab3:
         color_continuous_scale="tealrose",
         zmin=-1,
         zmax=1,
-        aspect="auto",
+        aspect="auto",#adjust the dimensions of the heatmap based on the number of rows and columns.
         title="Correlation Heatmap",
     )
 
-    fig.update_traces(textfont_size=9)
+    fig.update_traces(textfont_size=9)#fig.update_traces() means modify the visual properties of the traces (the actual data/graph elements) after the Plotly figure has been created.
 
     fig.update_layout(height=700, margin=dict(l=20, r=20, t=50, b=50))
 
