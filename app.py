@@ -280,7 +280,7 @@ with tab3:
 
     top_store = (
         df.groupby("Store")["Sales"]
-        .sum()
+        .mean()
         .sort_values(ascending=False)
         .head(10)
         .reset_index()
@@ -326,11 +326,13 @@ with tab3:
         color_continuous_scale="tealrose",
         zmin=-1,
         zmax=1,
-        aspect="auto",#adjust the dimensions of the heatmap based on the number of rows and columns.
+        aspect="auto",  # adjust the dimensions of the heatmap based on the number of rows and columns.
         title="Correlation Heatmap",
     )
 
-    fig.update_traces(textfont_size=9)#fig.update_traces() means modify the visual properties of the traces (the actual data/graph elements) after the Plotly figure has been created.
+    fig.update_traces(
+        textfont_size=9
+    )  # fig.update_traces() means modify the visual properties of the traces (the actual data/graph elements) after the Plotly figure has been created.
 
     fig.update_layout(height=700, margin=dict(l=20, r=20, t=50, b=50))
 
